@@ -1,8 +1,8 @@
-"""create all tables
+"""create all tables with correct date format
 
-Revision ID: 63604445b348
+Revision ID: f9e82a056282
 Revises: 
-Create Date: 2025-05-27 00:27:40.838977
+Create Date: 2025-05-27 00:56:41.407572
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '63604445b348'
+revision: str = 'f9e82a056282'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -32,17 +32,17 @@ def upgrade() -> None:
     sa.Column('name', sa.String(length=100), nullable=False),
     sa.Column('alias', sa.String(length=100), nullable=True),
     sa.Column('gender', sa.String(length=10), nullable=True),
-    sa.Column('date_of_birth', sa.DateTime(), nullable=True),
+    sa.Column('date_of_birth', sa.Date(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('crimes',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=100), nullable=False),
     sa.Column('description', sa.Text(), nullable=False),
-    sa.Column('date', sa.DateTime(), nullable=False),
+    sa.Column('date', sa.Date(), nullable=False),
     sa.Column('location', sa.String(length=100), nullable=False),
     sa.Column('severity', sa.String(length=20), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('created_at', sa.Date(), nullable=True),
     sa.Column('criminal_id', sa.Integer(), nullable=False),
     sa.Column('category_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['category_id'], ['categories.id'], ),

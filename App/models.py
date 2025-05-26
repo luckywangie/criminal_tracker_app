@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, Text, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from datetime import datetime
@@ -14,7 +14,7 @@ class Criminal(Base):
     name = Column(String(100), nullable=False)
     alias = Column(String(100))
     gender = Column(String(10))
-    date_of_birth = Column(DateTime)
+    date_of_birth = Column(Date)
 
 #relationship one criminal can perform many crimes
     crimes = relationship("Crime", back_populates="criminal", cascade="all, delete-orphan")
@@ -36,10 +36,10 @@ class Crime(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(100), unique=True, nullable=False)
     description = Column(Text, nullable=False)
-    date = Column(DateTime, nullable=False)
+    date = Column(Date, nullable=False)
     location = Column(String(100), nullable=False)
     severity = Column(String(20), nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(Date, default=datetime.utcnow)
 
 #foreign key for linking crime to a specific criminal
     criminal_id = Column(Integer, ForeignKey("criminals.id"), nullable=False)
