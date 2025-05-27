@@ -206,3 +206,71 @@ def delete_crime():
             print("Crime deleted.")
     else:
         print("Crime not found.")
+
+#MAIN MENU
+def main():
+    while True:
+        print("\n======= CRIMINAL TRACKER MENU =======")
+        print(" [ Criminals ]")
+        print("1. Add Criminal")
+        print("2. List All Criminals")
+        print("3. View Criminal by ID")
+        print("4. Update Criminal by ID")
+        print("5. Delete Criminal")
+
+        print("\n [ Crime Categories ]")
+        print("6. Create Crime Category")
+        print("7. List All Categories")
+        print("8. View Category by ID")
+        print("9. Update Category by ID")
+        print("10. Delete Category")
+
+        print("\n [ Crimes ]")
+        print("11. Record New Crime")
+        print("12. List All Crimes")
+        print("13. View Crime by ID")
+        print("14. Delete Crime by ID")
+        print("15. Update Crime by ID")
+
+        print("\n0. Exit")
+        
+        choice = input("\nYour choice: ").strip()
+        if choice == "1":
+            create_criminal()
+        elif choice == "2":
+            list_criminals()
+        elif choice == "3":
+            view_criminal_by_id()
+        elif choice == "4": 
+            update_criminal()
+        elif choice == "5":
+            delete_criminal()
+        elif choice == "6": 
+            create_category()
+        elif choice == "7": 
+            list_categories()
+        elif choice == "8": 
+            view_category_by_id()
+        elif choice == "9": 
+            update_category()
+        elif choice == "10": 
+            delete_category()
+        elif choice == "11": 
+            record_crime()
+        elif choice == "12": 
+            list_crimes()
+        elif choice == "13": 
+            view_crime_by_id()
+        elif choice == "14": 
+            delete_crime()
+        elif choice == "15":
+            update_crime()
+        elif choice == "0":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice. Try again.")
+
+if __name__ == "__main__":
+    main()
+
