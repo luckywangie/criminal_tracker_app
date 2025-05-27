@@ -63,3 +63,50 @@ def delete_criminal():
             print("Criminal deleted.")
     else:
         print("Criminal not found.")
+
+#Category functions
+def create_category():
+    name = input("New category name: ")
+    if session.query(Category).filter_by(name=name).first():
+        print("Category already exists.")
+        return
+    session.add(Category(name=name))
+    session.commit()
+    print("Category created.")
+
+def list_categories():
+    categories = session.query(Category).all()
+    for cat in categories:
+        print(f"ID: {cat.id}, Name: {cat.name}")
+
+def view_category_by_id():
+    cid = input("Enter category ID: ")
+    category = session.query(Category).get(cid)
+    if category:
+        print(f"ID: {category.id}, Name: {category.name}")
+    else:
+        print("Category not found.")
+
+def update_category():
+    cid = input("Enter category ID to update: ")
+    category = session.query(Category).get(cid)
+    if category:
+        new_name = input(f"New name (current: {category.name}): ")
+        if new_name:
+            category.name = new_name
+            session.commit()
+            print("Category updated.")
+    else:
+        print("Category not found.")
+
+def delete_category():
+    cid = input("Enter category ID to delete: ")
+    category = session.query(Category).get(cid)
+    if category:
+        confirm = input(f"Delete {category.name}? (y/n): ")
+        if confirm.lower() == 'y':
+            session.delete(category)
+            session.commit()
+            print("Category deleted.")
+    else:
+        print("Category not found.")
