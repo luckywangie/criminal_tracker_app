@@ -229,11 +229,11 @@ def main():
         print("11. Record New Crime")
         print("12. List All Crimes")
         print("13. View Crime by ID")
-        print("14. Delete Crime by ID")
-        print("15. Update Crime by ID")
+        print("14. Update Crime by ID")
+        print("15. Delete Crime by ID")
 
         print("\n0. Exit")
-        
+
         choice = input("\nYour choice: ").strip()
         if choice == "1":
             create_criminal()
@@ -261,10 +261,11 @@ def main():
             list_crimes()
         elif choice == "13": 
             view_crime_by_id()
-        elif choice == "14": 
-            delete_crime()
-        elif choice == "15":
+        elif choice == "14":
             update_crime()
+        elif choice == "15": 
+            delete_crime()
+       
         elif choice == "0":
             print("Goodbye!")
             break
