@@ -30,28 +30,64 @@ def list_criminals():
     criminals = session.query(Criminal).all()
     for c in criminals:
         print(f"ID: {c.id}, Name: {c.name}, Alias: {c.alias}, DOB: {c.date_of_birth}")
-#view criminal by ID
 def view_criminal_by_id():
     cid = input("Enter criminal ID: ")
     criminal = session.query(Criminal).get(cid)
     if criminal:
-        print(f"ID: {criminal.id}, Name: {criminal.name}, Alias: {criminal.alias}, Gender: {criminal.gender}, DOB: {criminal.date_of_birth}")
+        print(f"\nID: {criminal.id}")
+        print(f"Name: {criminal.name}")
+        print(f"Alias: {criminal.alias}")
+        print(f"Gender: {criminal.gender}")
+        print(f"DOB: {criminal.date_of_birth}")
+
+        if criminal.crimes:
+            print("\nCrimes Committed:")
+            for crime in criminal.crimes:
+                print(f"- Title: {crime.title}")
+                print(f"  Description: {crime.description}")
+                print(f"  Date: {crime.date}")
+                print(f"  Location: {crime.location}")
+                print(f"  Severity: {crime.severity}\n")
+        else:
+            print("\nNo crimes recorded for this criminal.")
     else:
         print("Criminal not found.")
+
 #update a criminal
 def update_criminal():
     cid = input("Enter criminal ID to update: ")
     criminal = session.query(Criminal).get(cid)
     if criminal:
         print("Leave a field empty to keep current value.")
+
         name = input(f"New name (current: {criminal.name}): ") or criminal.name
         alias = input(f"New alias (current: {criminal.alias}): ") or criminal.alias
         gender = input(f"New gender (current: {criminal.gender}): ") or criminal.gender
-        criminal.name, criminal.alias, criminal.gender = name, alias, gender
+
+        print(f"Current DOB: {criminal.date_of_birth}")
+        try:
+            year = input("New year of birth: ")
+            month = input("New month of birth: ")
+            day = input("New day of birth: ")
+
+            if year and month and day:
+                dob = date(int(year), int(month), int(day))
+            else:
+                dob = criminal.date_of_birth
+        except ValueError:
+            print("Invalid date input. Keeping current DOB.")
+            dob = criminal.date_of_birth
+
+        criminal.name = name
+        criminal.alias = alias
+        criminal.gender = gender
+        criminal.date_of_birth = dob
+
         session.commit()
         print("Criminal updated.")
     else:
         print("Criminal not found.")
+
 #delete a criminal
 def delete_criminal():
     cid = input("Enter criminal ID to delete: ")
@@ -148,14 +184,27 @@ def list_crimes():
     crimes = session.query(Crime).all()
     for c in crimes:
         print(f"ID: {c.id}, Title: {c.title}, Severity: {c.severity}, Location: {c.location}, Date: {c.date}")
-#view a crime by ID
+
+#view crime by ID
 def view_crime_by_id():
     cid = input("Enter crime ID: ")
     crime = session.query(Crime).get(cid)
     if crime:
-        print(f"Title: {crime.title}, Description: {crime.description}, Date: {crime.date}, Location: {crime.location}, Severity: {crime.severity}")
+        print(f"\nTitle: {crime.title}")
+        print(f"Description: {crime.description}")
+        print(f"Date: {crime.date}")
+        print(f"Location: {crime.location}")
+        print(f"Severity: {crime.severity}")
+
+        # Show criminal details
+        print("\nCriminal Responsible:")
+        print(f"Name: {crime.criminal.name}")
+        print(f"Alias: {crime.criminal.alias}")
+        print(f"Gender: {crime.criminal.gender}")
+        print(f"DOB: {crime.criminal.date_of_birth}")
     else:
         print("Crime not found.")
+
 #update a crime
 def update_crime():
     crime_id = input("Enter crime ID to update: ")
