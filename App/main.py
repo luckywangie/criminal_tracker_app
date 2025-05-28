@@ -1,12 +1,12 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine #creates connection to the sql database
+from sqlalchemy.orm import sessionmaker #makes new sqlalchemy session objects
 from models import Criminal, Crime, Category
 from datetime import date
 
 #connection to database
-engine = create_engine("sqlite:///criminal_tracker.db")
-Session = sessionmaker(bind=engine)
-session = Session()
+engine = create_engine("sqlite:///criminal_tracker.db")  #connects to the database
+Session = sessionmaker(bind=engine)  #binds the session to the engine
+session = Session() #makes a new session
 
 # Criminal functions
 #create a criminal
