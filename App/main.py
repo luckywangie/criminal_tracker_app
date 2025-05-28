@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from App.models import Criminal, Crime, Category
+from models import Criminal, Crime, Category
 from datetime import date
 
 #connection to database
