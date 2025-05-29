@@ -62,6 +62,9 @@ README.md # You're here!
 ## Author
 Lucky Mamati
 
+## Contact
+wangiemamati@gmail.com
+
 ## License
 Copyright --- 2025 Lucky Mamati
 
